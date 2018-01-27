@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/daily"
+        android:title="@string/mnu_daily" />
+    <item
+        android:id="@+id/weekly"
+        android:title="@string/mnu_weekly" />
+    <item
+        android:id="@+id/satimage"
+        android:title="@string/menu_satimage" />
+</menu>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="title_activity_main_key">MainKeyActivity</string>
+    <string name="preference_file_key">key</string>
+    <string name="your_api_key">Your API Key</string>
+    <string name="cwblink">Apply API KEY from <a href="https://opendata.cwb.gov.tw/index">Central Weather Bureau</a></string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+
+    <string name="mnu_daily">Daily</string>
+    <string name="mnu_weekly">Weekly</string>
+    <string name="menu_satimage">Satellite Images</string>
+
+    <string-array name="datatype_array">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Satellite Images</item>
+    </string-array>
+
+
+</resources>
