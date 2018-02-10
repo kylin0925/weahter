@@ -9,6 +9,8 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +40,8 @@ import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.xml.transform.Result;
@@ -55,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     ListView mDrawerList;
     ActionBarDrawerToggle actionBarDrawerToggle;
     WebView webView;
+    ViewPager viewPager;
+
     final String KEY= "key";
     String apiKey = "";
     String DATATYPE = "O-B0028-003";
@@ -133,18 +140,25 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 //txtWeather.setText(data);
 
-//                weatherParser w = new weatherParser();
-//                StringReader in = new StringReader( data );
-//                try {
-//                    w.parserDaily(in);
-//                }catch (Exception ex){
-//                    Log.e(TAG,"xml exception " + ex.toString());
-//                }
-                String xsl = getSytelSheet(R.raw.c0032);
-                String html = xmltoXslt(data,xsl);
-                webView.loadData(html,"text/html; charset=utf-8", "utf-8");
-                imageView.setImageBitmap(null);
-                webView.setVisibility(View.VISIBLE);
+                weatherParser w = new weatherParser();
+                StringReader in = new StringReader( data );
+                try {
+                   List<Location> lstLocation = w.parserDaily(in);
+                    List<View> lstView = new ArrayList<>();
+                    for(Location l:lstLocation){
+                        lstView.add(new PageView(getApplicationContext() ,l));
+                    }
+
+                   viewPager.setAdapter(new pagerAdapter(lstView));
+
+                }catch (Exception ex){
+                    Log.e(TAG,"xml exception " + ex.toString());
+                }
+//                String xsl = getSytelSheet(R.raw.c0032);
+//                String html = xmltoXslt(data,xsl);
+//                webView.loadData(html,"text/html; charset=utf-8", "utf-8");
+//                imageView.setImageBitmap(null);
+//                webView.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -277,7 +291,38 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        viewPager = (ViewPager)findViewById(R.id.pager);
     }
+    private class pagerAdapter extends PagerAdapter{
+        private List<View> lstPage;
+        public pagerAdapter( List<View> lstPage) {
+            this.lstPage = lstPage;
+        }
+
+        @Override
+        public int getCount() {
+            return lstPage.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view==object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View view = lstPage.get(position);
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

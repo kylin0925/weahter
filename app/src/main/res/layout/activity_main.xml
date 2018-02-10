@@ -11,17 +11,26 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark" />
+
         <TextView
+            android:id="@+id/txtWeatherData"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text=""
-            android:id="@+id/txtWeatherData" />
+            android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:id="@+id/imageView" />
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <WebView
             android:id="@+id/webResult"
@@ -29,7 +38,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="false"
             android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false" />
+            android:layout_alignParentStart="false"
+            android:visibility="gone" />
         <ListView
             android:id="@+id/left_drawer"
             android:layout_width="240dp"
@@ -40,6 +50,8 @@
             android:divider="@android:color/transparent"
             android:visibility="gone"
             android:dividerHeight="0dp" />
+
+
     </RelativeLayout>
 
 
