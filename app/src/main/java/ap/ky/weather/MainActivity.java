@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     String[] DATATYPELIST = {DAILYDATA,WEEKLYDATA,SATELLITEIMAGE};
     String[] weatherType;
     String queryStr = "http://opendata.cwb.gov.tw/opendataapi?dataid=%s&authorizationkey=%s";
-
+    ProgressBar progressBar;
     String getSytelSheet(int resid){
         String strXsl = "";
         InputStream raw = getResources().openRawResource(resid);
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 weatherParser w = new weatherParser();
                 StringReader in = new StringReader( data );
                 try {
-                   List<Location> lstLocation = w.parserDaily(in);
+                    List<Location> lstLocation = w.parserDaily(in);
                     List<View> lstView = new ArrayList<>();
                     for(Location l:lstLocation){
                         lstView.add(new PageView(getApplicationContext() ,l));
@@ -153,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }catch (Exception ex){
                     Log.e(TAG,"xml exception " + ex.toString());
+                    progressBar.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
 //                String xsl = getSytelSheet(R.raw.c0032);
 //                String html = xmltoXslt(data,xsl);
 //                webView.loadData(html,"text/html; charset=utf-8", "utf-8");
@@ -262,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
         };
         actionBarDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         imageView = (ImageView)findViewById(R.id.imageView);
 
@@ -288,11 +291,14 @@ public class MainActivity extends AppCompatActivity {
                 Thread t = new Thread(new queryRun(position));
                 t.start();
                 mDrawerLayout.closeDrawers();
+                progressBar.setVisibility(View.VISIBLE);
                 return true;
             }
         });
 
         viewPager = (ViewPager)findViewById(R.id.pager);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
@@ -351,13 +357,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //
-            Thread t = new Thread(new queryRun(position));
-            t.start();
-            mDrawerLayout.closeDrawers();
-        }
-    }
+//    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+//        @Override
+//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            //
+//            Thread t = new Thread(new queryRun(position));
+//            t.start();
+//
+//            mDrawerLayout.closeDrawers();
+//
+//        }
+//    }
 }

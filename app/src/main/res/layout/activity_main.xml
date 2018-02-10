@@ -16,7 +16,9 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark" >
+
+        </android.support.v4.view.ViewPager>
 
         <TextView
             android:id="@+id/txtWeatherData"
@@ -32,6 +34,15 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:indeterminate="false" />
+
         <WebView
             android:id="@+id/webResult"
             android:layout_width="match_parent"
@@ -39,7 +50,10 @@
             android:layout_alignParentBottom="false"
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="false"
-            android:visibility="gone" />
+            android:visibility="gone" >
+
+        </WebView>
+
         <ListView
             android:id="@+id/left_drawer"
             android:layout_width="240dp"
@@ -49,7 +63,10 @@
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
             android:visibility="gone"
-            android:dividerHeight="0dp" />
+            android:dividerHeight="0dp" >
+
+
+        </ListView>
 
 
     </RelativeLayout>
