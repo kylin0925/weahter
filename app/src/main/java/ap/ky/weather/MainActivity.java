@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
     String WEEKLYDATA = "F-C0032-003";
     String[] DATATYPELIST = {DAILYDATA,WEEKLYDATA,SATELLITEIMAGE};
     String[] weatherType;
+    final int TYPE_DAILY = 0;
+    final int TYPE_WEEKLY = 1;
+
     String queryStr = "http://opendata.cwb.gov.tw/opendataapi?dataid=%s&authorizationkey=%s";
     ProgressBar progressBar;
     String getSytelSheet(int resid){
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    void setWeatherData(final String data){
+    void setWeatherData(final String data,final int queryType){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -146,9 +149,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     List<Location> lstLocation = w.parserDaily(in);
                     List<View> lstView = new ArrayList<>();
-                    for(Location l:lstLocation){
-                        lstView.add(new PageView(getApplicationContext() ,l));
+                    for (Location l : lstLocation) {
+                        if(queryType == TYPE_DAILY) {
+                            lstView.add(new PageView(getApplicationContext(), l));
+                        }else if(queryType == TYPE_WEEKLY){
+                            lstView.add(new PageViewWeekly(getApplicationContext(), l));
+                        }
                     }
+
 
                    viewPager.setAdapter(new pagerAdapter(lstView));
 
@@ -223,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                     String result = httpreq(queryLink);
 
                     //String result = getSearchResult(types);
-                    setWeatherData(result);
+                    setWeatherData(result,queryType);
                     Log.e(TAG, "result " + result);
                 } catch (Exception e) {
                     Log.e(TAG, "exception ===>" + e.toString());

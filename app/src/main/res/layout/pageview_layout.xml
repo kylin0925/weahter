@@ -21,7 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtLocation"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/txtTemp"
@@ -31,7 +31,7 @@
         android:layout_below="@+id/txtLocation"
         android:layout_marginLeft="2dp"
         android:layout_toRightOf="@+id/txtStartTime1"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/txtStartTime2"
@@ -41,7 +41,7 @@
         android:layout_alignParentRight="false"
         android:layout_below="@+id/txtStartTime1"
         android:layout_marginTop="10dp"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/txtTemp2"
@@ -52,7 +52,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime2"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/txtStartTime3"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtStartTime2"
         android:layout_marginTop="10dp"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/txtTemp3"
@@ -71,6 +71,70 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime3"
-        android:text="TextView" />
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtStartTime4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime3"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtTemp4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtTemp3"
+        android:layout_toRightOf="@+id/txtStartTime4"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtStartTime5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime4"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtTemp5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtTemp4"
+        android:layout_toRightOf="@+id/txtStartTime5"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtStartTime6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime5"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtTemp6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtStartTime5"
+        android:layout_toRightOf="@+id/txtStartTime6"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtStartTime7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime6"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/txtTemp7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtTemp6"
+        android:layout_toRightOf="@+id/txtStartTime7"
+        android:text="" />
 
 </RelativeLayout>
