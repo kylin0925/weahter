@@ -127,9 +127,12 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.e(TAG,"Update UI");
                     webView.setVisibility(View.GONE);
                     imageView.setImageBitmap(bitmap);
+                    imageView.setVisibility(View.VISIBLE);
                     webView.clearFormData();
+                    progressBar.setVisibility(View.GONE);
                 }
             });
 

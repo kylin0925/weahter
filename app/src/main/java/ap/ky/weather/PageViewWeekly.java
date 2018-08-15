@@ -41,7 +41,7 @@ public class PageViewWeekly extends RelativeLayout {
             String[] templst = new String[7];
             for(int i = 0;i<7;i++){
                 timelst[i] = maxt.time.get(i*2).startTime + "\n" +
-                             maxt.time.get(i*2).endTime git sta ;
+                             maxt.time.get(i*2).endTime  ;
                              //maxt.time.get(i*2 + 1).startTime + "\n" +
                              //maxt.time.get(i*2 + 1).endTime + "\n";
 
