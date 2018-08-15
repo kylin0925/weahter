@@ -37,40 +37,35 @@ public class PageViewWeekly extends RelativeLayout {
         if (location.weatherElement != null) {
             WeatherElement maxt = location.weatherElement.get(1);
             WeatherElement mint = location.weatherElement.get(2);
+            String[] timelst = new String[7];
+            String[] templst = new String[7];
+            for(int i = 0;i<7;i++){
+                timelst[i] = maxt.time.get(i*2).startTime + "\n" +
+                             maxt.time.get(i*2).endTime git sta ;
+                             //maxt.time.get(i*2 + 1).startTime + "\n" +
+                             //maxt.time.get(i*2 + 1).endTime + "\n";
 
-            String time1 = maxt.time.get(0).startTime + "\n" + maxt.time.get(0).endTime;
-            String time2 = maxt.time.get(1).startTime + "\n" + maxt.time.get(1).endTime;
-            String time3 = maxt.time.get(2).startTime + "\n" + maxt.time.get(2).endTime;
-            String time4 = maxt.time.get(3).startTime + "\n" + maxt.time.get(3).endTime;
-            String time5 = maxt.time.get(4).startTime + "\n" + maxt.time.get(4).endTime;
-            String time6 = maxt.time.get(5).startTime + "\n" + maxt.time.get(5).endTime;
-            String time7 = maxt.time.get(6).startTime + "\n" + maxt.time.get(6).endTime;
+                templst[i] = mint.time.get(i*2).parameter.parameterName + " " +
+                             maxt.time.get(i*2).parameter.parameterName + "\n" +
+                             mint.time.get(i*2 + 1).parameter.parameterName + " " +
+                             maxt.time.get(i*2 + 1).parameter.parameterName ;
+            }
 
+            txtTemp1.setText(templst[0]);
+            txtTemp2.setText(templst[1]);
+            txtTemp3.setText(templst[2]);
+            txtTemp4.setText(templst[3]);
+            txtTemp5.setText(templst[4]);
+            txtTemp6.setText(templst[5]);
+            txtTemp7.setText(templst[6]);
 
-
-            txtTemp1.setText(mint.time.get(0).parameter.parameterName + " " +
-                    maxt.time.get(0).parameter.parameterName + "\n");
-            txtTemp2.setText(mint.time.get(1).parameter.parameterName + " " +
-                    maxt.time.get(1).parameter.parameterName + "\n");
-            txtTemp3.setText(mint.time.get(2).parameter.parameterName + " " +
-                    maxt.time.get(2).parameter.parameterName + "\n");
-
-            txtTemp4.setText(mint.time.get(3).parameter.parameterName + " " +
-                    maxt.time.get(3).parameter.parameterName + "\n");
-            txtTemp5.setText(mint.time.get(4).parameter.parameterName + " " +
-                    maxt.time.get(4).parameter.parameterName + "\n");
-            txtTemp6.setText(mint.time.get(5).parameter.parameterName + " " +
-                    maxt.time.get(5).parameter.parameterName + "\n");
-            txtTemp7.setText(mint.time.get(6).parameter.parameterName + " " +
-                    maxt.time.get(6).parameter.parameterName + "\n");
-
-            txtStartTime1.setText(time1);
-            txtStartTime2.setText(time2);
-            txtStartTime3.setText(time3);
-            txtStartTime4.setText(time4);
-            txtStartTime5.setText(time5);
-            txtStartTime6.setText(time6);
-            txtStartTime7.setText(time7);
+            txtStartTime1.setText(timelst[0]);
+            txtStartTime2.setText(timelst[1]);
+            txtStartTime3.setText(timelst[2]);
+            txtStartTime4.setText(timelst[3]);
+            txtStartTime5.setText(timelst[4]);
+            txtStartTime6.setText(timelst[5]);
+            txtStartTime7.setText(timelst[6]);
         }
 
         addView(view);

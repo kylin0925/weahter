@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     String DATATYPE = "O-B0028-003";
     String SATELLITEIMAGE = "O-B0028-003";
     String DAILYDATA = "F-C0032-001";
-    String WEEKLYDATA = "F-C0032-003";
+    String WEEKLYDATA = "F-C0032-005";
     String[] DATATYPELIST = {DAILYDATA,WEEKLYDATA,SATELLITEIMAGE};
     String[] weatherType;
     final int TYPE_DAILY = 0;

@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/txtLocation"
@@ -18,8 +17,8 @@
         android:id="@+id/txtStartTime1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
         android:layout_below="@+id/txtLocation"
         android:text="" />
 
@@ -31,6 +30,7 @@
         android:layout_below="@+id/txtLocation"
         android:layout_marginLeft="2dp"
         android:layout_toRightOf="@+id/txtStartTime1"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
     <TextView
@@ -52,6 +52,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime2"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
     <TextView
@@ -71,6 +72,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime3"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
     <TextView
@@ -78,6 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtStartTime3"
+        android:layout_marginTop="10dp"
         android:text="" />
 
     <TextView
@@ -86,7 +89,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/txtTemp3"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime4"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
     <TextView
@@ -94,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtStartTime4"
+        android:layout_marginTop="10dp"
         android:text="" />
 
     <TextView
@@ -102,7 +109,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/txtTemp4"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime5"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
     <TextView
@@ -110,6 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtStartTime5"
+        android:layout_marginTop="10dp"
         android:text="" />
 
     <TextView
@@ -117,8 +128,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtStartTime5"
+        android:layout_below="@+id/txtTemp5"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txtStartTime6"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
     <TextView
@@ -126,6 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtStartTime6"
+        android:layout_marginTop="10dp"
         android:text="" />
 
     <TextView
@@ -133,8 +148,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/txtTemp6"
         android:layout_toRightOf="@+id/txtStartTime7"
+        android:background="@android:color/holo_blue_bright"
         android:text="" />
 
 </RelativeLayout>
