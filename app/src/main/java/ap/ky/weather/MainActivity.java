@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                 }
                 progressBar.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
 //                String xsl = getSytelSheet(R.raw.c0032);
 //                String html = xmltoXslt(data,xsl);
 //                webView.loadData(html,"text/html; charset=utf-8", "utf-8");
