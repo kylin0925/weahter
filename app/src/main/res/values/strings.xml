@@ -18,5 +18,7 @@
         <item>Satellite Images</item>
     </string-array>
 
-
+    <string name="menu_daily">Daily</string>
+    <string name="menu_weekly">Weekly</string>
+    <string name="menu_satellite">Satellite</string>
 </resources>

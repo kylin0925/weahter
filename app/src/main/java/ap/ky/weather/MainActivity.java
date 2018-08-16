@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
+//import android.support.design.internal.BottomNavigationMenu;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -22,8 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -32,10 +29,8 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.EOFException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
@@ -44,7 +39,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -57,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     TextView txtWeather;
     Bitmap bitmap;
-    private DrawerLayout mDrawerLayout;
-    ListView mDrawerList;
+
     ActionBarDrawerToggle actionBarDrawerToggle;
     WebView webView;
     ViewPager viewPager;
+    BottomNavigationView bottomNavigationView;
 
     final String KEY= "key";
     String apiKey = "";
@@ -145,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //txtWeather.setText(data);
-
                 weatherParser w = new weatherParser();
                 StringReader in = new StringReader( data );
                 try {
@@ -159,10 +151,7 @@ public class MainActivity extends AppCompatActivity {
                             lstView.add(new PageViewWeekly(getApplicationContext(), l));
                         }
                     }
-
-
                    viewPager.setAdapter(new pagerAdapter(lstView));
-
                 }catch (Exception ex){
                     Log.e(TAG,"xml exception " + ex.toString());
                     progressBar.setVisibility(View.GONE);
@@ -191,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
             String tmp = "";
             while ((tmp = br.readLine()) != null) {
                 result +=tmp;
-                // Log.e(TAG, "url ok " + tmp);
             }
             h.disconnect();
         }catch (Exception e){
@@ -227,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG,"queryType " + queryType);
             if(queryType == 2){
                 getImage( "http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
-
             }else {
                 try {
                     String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
@@ -248,69 +235,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtWeather = (TextView)findViewById(R.id.txtWeatherData);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.activity_main);
-        mDrawerList = (ListView)findViewById(R.id.left_drawer);
+
         weatherType = getResources().getStringArray(R.array.datatype_array);
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item,weatherType));
+
         webView = (WebView)findViewById(R.id.webResult);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-       // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close){
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
-            }
-        };
-        actionBarDrawerToggle.syncState();
-        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
-        //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
         imageView = (ImageView)findViewById(R.id.imageView);
 
         final SharedPreferences sharedPref = getSharedPreferences("", Context.MODE_PRIVATE);
         apiKey = sharedPref.getString(KEY,"");
         Log.e(TAG,"key is " + apiKey);
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        viewPager = (ViewPager)findViewById(R.id.pager);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
+
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 Log.e(TAG,"" + id);
                 int position = 0;
-                if(id == R.id.daily){
+                if(id == R.id.menu_daily){
                     position = 0;
-                }else if(id == R.id.weekly){
+                }else if(id == R.id.menu_weekly){
                     position = 1;
-                }else if(id == R.id.satimage){
+                }else if(id == R.id.menu_satellite){
                     position = 2;
                 }
-
+                Log.e(TAG,"position " + position);
                 Thread t = new Thread(new queryRun(position));
                 t.start();
-                mDrawerLayout.closeDrawers();
                 progressBar.setVisibility(View.VISIBLE);
                 return true;
             }
         });
 
-        viewPager = (ViewPager)findViewById(R.id.pager);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
@@ -368,16 +328,4 @@ public class MainActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
     }
-
-//    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            //
-//            Thread t = new Thread(new queryRun(position));
-//            t.start();
-//
-//            mDrawerLayout.closeDrawers();
-//
-//        }
-//    }
 }
