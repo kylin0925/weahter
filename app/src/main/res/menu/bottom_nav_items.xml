@@ -3,16 +3,16 @@
     <item
         android:id="@+id/menu_daily"
         android:title="@string/menu_daily"
-
+        android:icon="@drawable/today"
         />
     <item
         android:id="@+id/menu_weekly"
         android:title="@string/menu_weekly"
-
+        android:icon="@drawable/weekly"
         />
     <item
         android:id="@+id/menu_satellite"
         android:title="@string/menu_satellite"
-
+        android:icon="@drawable/satellite"
         />
 </menu>
