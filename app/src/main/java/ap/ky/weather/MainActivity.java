@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setVisibility(View.VISIBLE);
                     webView.clearFormData();
                     progressBar.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.GONE);
                 }
             });
 
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 progressBar.setVisibility(View.GONE);
                 imageView.setVisibility(View.GONE);
+                viewPager.setVisibility(View.VISIBLE);
 //                String xsl = getSytelSheet(R.raw.c0032);
 //                String html = xmltoXslt(data,xsl);
 //                webView.loadData(html,"text/html; charset=utf-8", "utf-8");
@@ -247,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager)findViewById(R.id.pager);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -270,7 +271,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        progressBar.setVisibility(View.VISIBLE);
+        Thread t = new Thread(new queryRun(0));
+        t.start();
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
