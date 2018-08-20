@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-//import android.support.design.internal.BottomNavigationMenu;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,29 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Weather";
@@ -67,50 +46,10 @@ public class MainActivity extends AppCompatActivity {
     String[] weatherType;
     final int TYPE_DAILY = 0;
     final int TYPE_WEEKLY = 1;
+    final int TYPE_SATELLITE = 2;
 
     String queryStr = "http://opendata.cwb.gov.tw/opendataapi?dataid=%s&authorizationkey=%s";
     ProgressBar progressBar;
-    String getSytelSheet(int resid){
-        String strXsl = "";
-        InputStream raw = getResources().openRawResource(resid);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
-        int size = 0;
-        try{
-            while( (size = raw.read(buffer,0,1024)) > 0){
-                outputStream.write(buffer,0,size);
-            }
-            raw.close();
-            strXsl = outputStream.toString();
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-        return strXsl;
-    }
-    String xmltoXslt(String xml,String xsl){
-        String html = "";
-        try {
-            InputStream ds = new ByteArrayInputStream(xml.getBytes("UTF-8"));
-            Source xmlSource = new StreamSource(ds);
-
-            InputStream xs = new ByteArrayInputStream(xsl.getBytes("UTF-8"));
-            Source xslSource = new StreamSource(xs);
-
-            StringWriter writer = new StringWriter();
-            Result result = new StreamResult(writer);
-            TransformerFactory factory = TransformerFactory.newInstance();
-            Transformer transformer = factory.newTransformer(xslSource);
-            transformer.transform(xmlSource,result);
-            html = writer.toString();
-            ds.close();
-            xs.close();
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return html;
-    }
     void getImage(String url){
         Log.e(TAG,"GET " + url);
         WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
@@ -153,32 +92,10 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 imageView.setVisibility(View.GONE);
                 viewPager.setVisibility(View.VISIBLE);
-//                String xsl = getSytelSheet(R.raw.c0032);
-//                String html = xmltoXslt(data,xsl);
-//                webView.loadData(html,"text/html; charset=utf-8", "utf-8");
-//                imageView.setImageBitmap(null);
-//                webView.setVisibility(View.VISIBLE);
             }
         });
     }
 
-//    Runnable r = new Runnable() {
-//
-//        @Override
-//        public void run() {
-//            try {
-//                String queryLink = String.format(queryStr,DATATYPE,apiKey );
-//                Log.e(TAG,queryLink);
-//                String result = httpreq(queryLink);
-//                getImage( "http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
-//                //String result = getSearchResult(types);
-//                //setData(result);
-//                Log.e(TAG,"result " + result);
-//            }catch (Exception e){
-//                Log.e(TAG,"exception ===>" + e.toString());
-//            }
-//        }
-//    };
     private class queryRun implements Runnable{
         int queryType;
         public queryRun(int queryType) {
@@ -188,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             Log.e(TAG,"queryType " + queryType);
-            if(queryType == 2){
+            if(queryType == TYPE_SATELLITE){
                 getImage( "http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
             }else {
                 try {
@@ -196,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, queryLink);
                     WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
                     String result = weatherDataFetcher.sentHttpRequestGet(queryLink);
-
-                    //String result = getSearchResult(types);
                     setWeatherData(result,queryType);
                     Log.e(TAG, "result " + result);
                 } catch (Exception e) {
@@ -211,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtWeather = (TextView)findViewById(R.id.txtWeatherData);
-
         weatherType = getResources().getStringArray(R.array.datatype_array);
 
         webView = (WebView)findViewById(R.id.webResult);
@@ -232,11 +146,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG,"" + id);
                 int position = 0;
                 if(id == R.id.menu_daily){
-                    position = 0;
+                    position = TYPE_DAILY;
                 }else if(id == R.id.menu_weekly){
-                    position = 1;
+                    position = TYPE_WEEKLY;
                 }else if(id == R.id.menu_satellite){
-                    position = 2;
+                    position = TYPE_SATELLITE;
                 }
                 Log.e(TAG,"position " + position);
                 Thread t = new Thread(new queryRun(position));
