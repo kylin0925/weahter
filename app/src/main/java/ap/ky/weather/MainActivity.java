@@ -113,28 +113,21 @@ public class MainActivity extends AppCompatActivity {
     }
     void getImage(String url){
         Log.e(TAG,"GET " + url);
-        try{
-            URL u = new URL(url);
-            URLConnection conn = u.openConnection();
-            bitmap = BitmapFactory.decodeStream(conn.getInputStream());
+        WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+        bitmap = weatherDataFetcher.getSatelliteImage(url);
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e(TAG,"Update UI");
-                    webView.setVisibility(View.GONE);
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setVisibility(View.VISIBLE);
-                    webView.clearFormData();
-                    progressBar.setVisibility(View.GONE);
-                    viewPager.setVisibility(View.GONE);
-                }
-            });
-
-        }catch (Exception ex){
-            Log.e(TAG,"error " + ex);
-        }
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG,"Update UI");
+                webView.setVisibility(View.GONE);
+                imageView.setImageBitmap(bitmap);
+                imageView.setVisibility(View.VISIBLE);
+                webView.clearFormData();
+                progressBar.setVisibility(View.GONE);
+                viewPager.setVisibility(View.GONE);
+            }
+        });
     }
     void setWeatherData(final String data,final int queryType){
         runOnUiThread(new Runnable() {
@@ -168,27 +161,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    String httpreq(String url){
-        String result = "";
-        try {
-            URL u = new URL(url);
-            HttpURLConnection h = (HttpURLConnection) u.openConnection();
-            //InputStream in = new BufferedInputStream(h.getInputStream());
-            //readStream(in);
-            int len = 0;
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(h.getInputStream()));
-
-            String tmp = "";
-            while ((tmp = br.readLine()) != null) {
-                result +=tmp;
-            }
-            h.disconnect();
-        }catch (Exception e){
-            Log.e(TAG,"exception : " + e.toString());
-        }
-        return result;
-    }
 //    Runnable r = new Runnable() {
 //
 //        @Override
@@ -221,7 +194,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
                     Log.e(TAG, queryLink);
-                    String result = httpreq(queryLink);
+                    WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+                    String result = weatherDataFetcher.sentHttpRequestGet(queryLink);
 
                     //String result = getSearchResult(types);
                     setWeatherData(result,queryType);
