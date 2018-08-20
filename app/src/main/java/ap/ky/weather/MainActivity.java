@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.PagerAdapter;
@@ -50,77 +51,89 @@ public class MainActivity extends AppCompatActivity {
 
     String queryStr = "http://opendata.cwb.gov.tw/opendataapi?dataid=%s&authorizationkey=%s";
     ProgressBar progressBar;
-    void getImage(String url){
-        Log.e(TAG,"GET " + url);
-        WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
-        bitmap = weatherDataFetcher.getSatelliteImage(url);
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Log.e(TAG,"Update UI");
-                webView.setVisibility(View.GONE);
-                imageView.setImageBitmap(bitmap);
-                imageView.setVisibility(View.VISIBLE);
-                webView.clearFormData();
-                progressBar.setVisibility(View.GONE);
-                viewPager.setVisibility(View.GONE);
-            }
-        });
-    }
-    void setWeatherData(final String data,final int queryType){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                weatherParser w = new weatherParser();
-                StringReader in = new StringReader( data );
-                try {
-                    List<Location> lstLocation = w.parserDaily(in);
-                    List<View> lstView = new ArrayList<>();
-                    for (Location l : lstLocation) {
-                        if(queryType == TYPE_DAILY) {
-                            lstView.add(new PageView(getApplicationContext(), l));
-                        }else if(queryType == TYPE_WEEKLY){
-                            lstView.add(new PageViewWeekly(getApplicationContext(), l));
-                        }
-                    }
-                   viewPager.setAdapter(new pagerAdapter(lstView));
-                }catch (Exception ex){
-                    Log.e(TAG,"xml exception " + ex.toString());
-                    progressBar.setVisibility(View.GONE);
-                }
-                progressBar.setVisibility(View.GONE);
-                imageView.setVisibility(View.GONE);
-                viewPager.setVisibility(View.VISIBLE);
-            }
-        });
-    }
 
-    private class queryRun implements Runnable{
-        int queryType;
-        public queryRun(int queryType) {
-            this.queryType = queryType;
+    private class FetchSatelliteImageTask extends AsyncTask<String,Integer,Bitmap>{
+        String TAG = "FetchDataTask";
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+            Bitmap bitmap = weatherDataFetcher.getSatelliteImage(urls[0]);
+            return bitmap;
         }
 
         @Override
-        public void run() {
-            Log.e(TAG,"queryType " + queryType);
-            if(queryType == TYPE_SATELLITE){
-                getImage( "http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
-            }else {
-                try {
-                    String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
-                    Log.e(TAG, queryLink);
-                    WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
-                    String result = weatherDataFetcher.sentHttpRequestGet(queryLink);
-                    setWeatherData(result,queryType);
-                    Log.e(TAG, "result " + result);
-                } catch (Exception e) {
-                    Log.e(TAG, "exception ===>" + e.toString());
-                }
-            }
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            //int queryType = integer;
+            Log.e(TAG,"Image download complete");
+
+            webView.setVisibility(View.GONE);
+            imageView.setImageBitmap(bitmap);
+            imageView.setVisibility(View.VISIBLE);
+            webView.clearFormData();
+            progressBar.setVisibility(View.GONE);
+            viewPager.setVisibility(View.GONE);
         }
     }
+    private class FetchWeatherTask extends AsyncTask<Integer,Integer,String>{
+        String TAG = "FetchDataTask";
+        int queryType;
+        @Override
+        protected String doInBackground(Integer... params) {
+            try {
+                queryType = params[0];
+                String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
+                Log.e(TAG, queryLink);
+                WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+                String result = weatherDataFetcher.sentHttpRequestGet(queryLink);
+                //setWeatherData(result,queryType);
+                Log.e(TAG, "result " + result);
+                return result;
+            } catch (Exception e) {
+                Log.e(TAG, "exception ===>" + e.toString());
+                return null;
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String data) {
+            super.onPostExecute(data);
+            //int queryType = integer;
+            Log.e(TAG,"Image download complete");
+            weatherParser w = new weatherParser();
+            StringReader in = new StringReader( data );
+            try {
+                List<Location> lstLocation = w.parserDaily(in);
+                List<View> lstView = new ArrayList<>();
+                for (Location l : lstLocation) {
+                    if(queryType == TYPE_DAILY) {
+                        lstView.add(new PageView(getApplicationContext(), l));
+                    }else if(queryType == TYPE_WEEKLY){
+                        lstView.add(new PageViewWeekly(getApplicationContext(), l));
+                    }
+                }
+                viewPager.setAdapter(new pagerAdapter(lstView));
+            }catch (Exception ex){
+                Log.e(TAG,"xml exception " + ex.toString());
+                progressBar.setVisibility(View.GONE);
+            }
+            progressBar.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,21 +160,30 @@ public class MainActivity extends AppCompatActivity {
                 int position = 0;
                 if(id == R.id.menu_daily){
                     position = TYPE_DAILY;
+                    FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+                    fetchWeatherTask.execute(TYPE_DAILY);
                 }else if(id == R.id.menu_weekly){
                     position = TYPE_WEEKLY;
+                    FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+                    fetchWeatherTask.execute(TYPE_WEEKLY);
                 }else if(id == R.id.menu_satellite){
                     position = TYPE_SATELLITE;
+                    FetchSatelliteImageTask fetchDataTask = new FetchSatelliteImageTask();
+                    fetchDataTask.execute("http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
                 }
                 Log.e(TAG,"position " + position);
-                Thread t = new Thread(new queryRun(position));
-                t.start();
+                //Thread t = new Thread(new queryRun(position));
+                //t.start();
+
                 progressBar.setVisibility(View.VISIBLE);
                 return true;
             }
         });
         progressBar.setVisibility(View.VISIBLE);
-        Thread t = new Thread(new queryRun(0));
-        t.start();
+        //Thread t = new Thread(new queryRun(0));
+        //t.start();
+        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+        fetchWeatherTask.execute(TYPE_DAILY);
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
