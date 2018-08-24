@@ -44,6 +44,7 @@ public class PageView extends RelativeLayout{
         textView.setText(location.Name);
 
         if(location.weatherElement!=null) {
+            WeatherElement wx = location.weatherElement.get(0);
             WeatherElement maxt = location.weatherElement.get(1);
             WeatherElement mint = location.weatherElement.get(2);
 
@@ -53,11 +54,11 @@ public class PageView extends RelativeLayout{
 
 
             txtTemp1.setText(mint.time.get(0).parameter.parameterName + " " +
-                     maxt.time.get(0).parameter.parameterName + "\n");
+                     maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName);
             txtTemp2.setText(mint.time.get(1).parameter.parameterName + " " +
-                    maxt.time.get(1).parameter.parameterName + "\n");
+                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName);
             txtTemp3.setText(mint.time.get(2).parameter.parameterName + " " +
-                    maxt.time.get(2).parameter.parameterName + "\n");
+                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName);
 
             txtStartTime1.setText(time1);
             txtStartTime2.setText(time2);

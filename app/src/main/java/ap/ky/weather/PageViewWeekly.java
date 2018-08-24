@@ -35,6 +35,7 @@ public class PageViewWeekly extends RelativeLayout {
         textView.setText(location.Name);
 
         if (location.weatherElement != null) {
+            WeatherElement wx = location.weatherElement.get(0);
             WeatherElement maxt = location.weatherElement.get(1);
             WeatherElement mint = location.weatherElement.get(2);
             String[] timelst = new String[7];
@@ -46,9 +47,11 @@ public class PageViewWeekly extends RelativeLayout {
                              //maxt.time.get(i*2 + 1).endTime + "\n";
 
                 templst[i] = mint.time.get(i*2).parameter.parameterName + " " +
-                             maxt.time.get(i*2).parameter.parameterName + "\n" +
+                             maxt.time.get(i*2).parameter.parameterName + " " +
+                             wx.time.get(i*2).parameter.parameterName + "\n" +
                              mint.time.get(i*2 + 1).parameter.parameterName + " " +
-                             maxt.time.get(i*2 + 1).parameter.parameterName ;
+                             maxt.time.get(i*2 + 1).parameter.parameterName + " " +
+                             wx.time.get(i*2).parameter.parameterName;
             }
 
             txtTemp1.setText(templst[0]);
