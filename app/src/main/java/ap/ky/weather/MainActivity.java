@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
             WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
             Record record = weatherDataFetcher.getDailyData(apiKey);
             Log.e(TAG,"record " + record.datasetDescription);
-            return record.location;
+            List<Location> locations = new LocationSort().sortLocation(record.location);
+            return locations;
         }
         List<Location> getWeeklyData(){
             String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
             weatherParser w = new weatherParser();
             StringReader in = new StringReader( result );
             try {
-                return w.parserDaily(in);
+                List<Location> locations = new LocationSort().sortLocation(w.parserDaily(in));
+                return locations;
             }catch (Exception ex){
                 Log.e(TAG,"get weekly data error: " + ex.toString());
             }
