@@ -7,7 +7,7 @@ import java.util.List;
  */
 
 public class Location {
-    String Name;
+    String locationName;
     List<WeatherElement> weatherElement;
 
     public Location() {

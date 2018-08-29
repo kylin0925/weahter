@@ -81,20 +81,54 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setVisibility(View.GONE);
         }
     }
-    private class FetchWeatherTask extends AsyncTask<Integer,Integer,String>{
+    private class FetchWeatherTask extends AsyncTask<Integer,Integer,List<View>>{
         String TAG = "FetchDataTask";
+        List<Location> getDailyData(){
+            WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+            Record record = weatherDataFetcher.getDailyData(apiKey);
+            Log.e(TAG,"record " + record.datasetDescription);
+            return record.location;
+        }
+        List<Location> getWeeklyData(){
+            String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
+            Log.e(TAG, queryLink);
+            WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+            String result = weatherDataFetcher.sentHttpRequestGet(queryLink);
+            //setWeatherData(result,queryType);
+            Log.e(TAG, "result " + result);
+
+            weatherParser w = new weatherParser();
+            StringReader in = new StringReader( result );
+            try {
+                return w.parserDaily(in);
+            }catch (Exception ex){
+                Log.e(TAG,"get weekly data error: " + ex.toString());
+            }
+            return null;
+        }
         int queryType;
         @Override
-        protected String doInBackground(Integer... params) {
+        protected List<View> doInBackground(Integer... params) {
             try {
                 queryType = params[0];
-                String queryLink = String.format(queryStr, DATATYPELIST[queryType], apiKey);
-                Log.e(TAG, queryLink);
-                WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
-                String result = weatherDataFetcher.sentHttpRequestGet(queryLink);
-                //setWeatherData(result,queryType);
-                Log.e(TAG, "result " + result);
-                return result;
+                List<Location> lstLocation =null ;
+                if(queryType == TYPE_DAILY){
+                    lstLocation = getDailyData();
+                }
+                if(queryType == TYPE_WEEKLY){
+                    lstLocation = getWeeklyData();
+                }
+                List<View> lstView = new ArrayList<>();
+                if(lstLocation!=null) {
+                    for (Location l : lstLocation) {
+                        if (queryType == TYPE_DAILY) {
+                            lstView.add(new PageView(getApplicationContext(), l));
+                        } else if (queryType == TYPE_WEEKLY) {
+                            lstView.add(new PageViewWeekly(getApplicationContext(), l));
+                        }
+                    }
+                }
+                return lstView;
             } catch (Exception e) {
                 Log.e(TAG, "exception ===>" + e.toString());
                 return null;
@@ -107,27 +141,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String data) {
-            super.onPostExecute(data);
-            //int queryType = integer;
-            Log.e(TAG,"Image download complete");
-            weatherParser w = new weatherParser();
-            StringReader in = new StringReader( data );
-            try {
-                List<Location> lstLocation = w.parserDaily(in);
-                List<View> lstView = new ArrayList<>();
-                for (Location l : lstLocation) {
-                    if(queryType == TYPE_DAILY) {
-                        lstView.add(new PageView(getApplicationContext(), l));
-                    }else if(queryType == TYPE_WEEKLY){
-                        lstView.add(new PageViewWeekly(getApplicationContext(), l));
-                    }
-                }
-                viewPager.setAdapter(new pagerAdapter(lstView));
-            }catch (Exception ex){
-                Log.e(TAG,"xml exception " + ex.toString());
-                progressBar.setVisibility(View.GONE);
-            }
+        protected void onPostExecute(List<View> lstView) {
+            super.onPostExecute(lstView);
+            Log.e(TAG,"download complete");
+            viewPager.setAdapter(new pagerAdapter(lstView));
             progressBar.setVisibility(View.GONE);
             imageView.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);

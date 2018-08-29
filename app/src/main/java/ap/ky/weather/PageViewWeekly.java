@@ -32,7 +32,7 @@ public class PageViewWeekly extends RelativeLayout {
         TextView txtTemp5 = (TextView) view.findViewById(R.id.txtTemp5);
         TextView txtTemp6 = (TextView) view.findViewById(R.id.txtTemp6);
         TextView txtTemp7 = (TextView) view.findViewById(R.id.txtTemp7);
-        textView.setText(location.Name);
+        textView.setText(location.locationName);
 
         if (location.weatherElement != null) {
             WeatherElement wx = location.weatherElement.get(0);

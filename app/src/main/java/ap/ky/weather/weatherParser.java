@@ -90,8 +90,8 @@ public class weatherParser {
                 Log.e(TAG,"tagName  :" + parser.getName());
                 if(tagName.equals("locationName")){
                    eventType = parser.next();
-                   location.Name = parser.getText();
-                   Log.e(TAG,"location Name :" + location.Name);
+                   location.locationName = parser.getText();
+                   Log.e(TAG,"location Name :" + location.locationName);
                    //eventType = parser.next(); // end tag
                    // Log.e(TAG,"tag  :" + parser.getName());
                 }
@@ -206,7 +206,7 @@ public class weatherParser {
                 }
                 if(tagName.equals("parameterUnit")){
                     eventType = parser.next();
-                    parameter.parameterUnit = parser.getText();
+                    //parameter.parameterUnit = parser.getText();
                 }
 
             }

@@ -41,12 +41,13 @@ public class PageView extends RelativeLayout{
         txtTemp6.setVisibility(GONE);
         txtTemp7.setVisibility(GONE);
 
-        textView.setText(location.Name);
+        textView.setText(location.locationName);
 
         if(location.weatherElement!=null) {
             WeatherElement wx = location.weatherElement.get(0);
-            WeatherElement maxt = location.weatherElement.get(1);
+            WeatherElement maxt = location.weatherElement.get(4);
             WeatherElement mint = location.weatherElement.get(2);
+            WeatherElement pop = location.weatherElement.get(1);
 
             String time1 = maxt.time.get(0).startTime + "\n" + maxt.time.get(0).endTime;
             String time2 = maxt.time.get(1).startTime + "\n" + maxt.time.get(1).endTime;
@@ -54,11 +55,14 @@ public class PageView extends RelativeLayout{
 
 
             txtTemp1.setText(mint.time.get(0).parameter.parameterName + " " +
-                     maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName);
+                     maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName+ " " +
+                    pop.time.get(0).parameter.parameterName);
             txtTemp2.setText(mint.time.get(1).parameter.parameterName + " " +
-                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName);
+                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName + " " +
+                    pop.time.get(1).parameter.parameterName);
             txtTemp3.setText(mint.time.get(2).parameter.parameterName + " " +
-                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName);
+                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName +" " +
+                    pop.time.get(2).parameter.parameterName);
 
             txtStartTime1.setText(time1);
             txtStartTime2.setText(time2);

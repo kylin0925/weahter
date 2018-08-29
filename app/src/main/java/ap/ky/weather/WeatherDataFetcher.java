@@ -4,6 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -13,6 +17,9 @@ import java.net.URLConnection;
 public class WeatherDataFetcher {
     String TAG = "WeatherDataFetcher";
     static WeatherDataFetcher weatherDataFetcher = null;
+    String DAILYDATA = "F-C0032-001";
+    String WEEKLYDATA = "F-C0032-005";
+    String dataurl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/%s?authorizationkey=%s";
     public static WeatherDataFetcher getInstance(){
         if(weatherDataFetcher == null)
             return new WeatherDataFetcher();
@@ -51,5 +58,20 @@ public class WeatherDataFetcher {
             Log.e(TAG,"exception : " + e.toString());
         }
         return result;
+    }
+    Record getDailyData(String apiKey){
+        String reqUrl =String.format(dataurl, DAILYDATA,apiKey);
+        String weatherData = sentHttpRequestGet(reqUrl);
+        try {
+            JSONObject jsonObject = new JSONObject(weatherData);
+            JSONObject record = jsonObject.getJSONObject("records");
+            Gson gson = new Gson();
+            Record weatherRecord = gson.fromJson(record.toString(),Record.class);
+            Log.e(TAG,"wether record " + weatherRecord.datasetDescription);
+            return weatherRecord;
+        }catch (Exception ex){
+            Log.e(TAG,"getDailyData error " + ex.toString());
+        }
+        return null;
     }
 }
