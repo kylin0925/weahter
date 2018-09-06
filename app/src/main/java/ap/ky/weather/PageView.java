@@ -49,20 +49,20 @@ public class PageView extends RelativeLayout{
             WeatherElement mint = location.weatherElement.get(2);
             WeatherElement pop = location.weatherElement.get(1);
 
-            String time1 = maxt.time.get(0).startTime + "\n" + maxt.time.get(0).endTime;
-            String time2 = maxt.time.get(1).startTime + "\n" + maxt.time.get(1).endTime;
-            String time3 = maxt.time.get(2).startTime + "\n" + maxt.time.get(2).endTime;
+            String time1 = maxt.time.get(0).startTime + "\n" + maxt.time.get(0).endTime + "\n";
+            String time2 = maxt.time.get(1).startTime + "\n" + maxt.time.get(1).endTime + "\n";
+            String time3 = maxt.time.get(2).startTime + "\n" + maxt.time.get(2).endTime + "\n";
 
 
             txtTemp1.setText(mint.time.get(0).parameter.parameterName + " " +
-                     maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName+ " " +
-                    pop.time.get(0).parameter.parameterName);
+                    maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName+ "\n" +
+                    "降雨機率" + pop.time.get(0).parameter.parameterName);
             txtTemp2.setText(mint.time.get(1).parameter.parameterName + " " +
-                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName + " " +
-                    pop.time.get(1).parameter.parameterName);
+                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName + "\n" +
+                    "降雨機率" + pop.time.get(1).parameter.parameterName);
             txtTemp3.setText(mint.time.get(2).parameter.parameterName + " " +
-                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName +" " +
-                    pop.time.get(2).parameter.parameterName);
+                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName +"\n" +
+                    "降雨機率" + pop.time.get(2).parameter.parameterName);
 
             txtStartTime1.setText(time1);
             txtStartTime2.setText(time2);

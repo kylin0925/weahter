@@ -22,6 +22,8 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +76,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG,"Image download complete");
 
             webView.setVisibility(View.GONE);
-            imageView.setImageBitmap(bitmap);
+            if(bitmap!=null)
+                imageView.setImageBitmap(bitmap);
+            else
+                Toast.makeText(getApplicationContext(),"Get Satellite image error",Toast.LENGTH_LONG).show();
             imageView.setVisibility(View.VISIBLE);
             webView.clearFormData();
             progressBar.setVisibility(View.GONE);
@@ -146,7 +151,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<View> lstView) {
             super.onPostExecute(lstView);
             Log.e(TAG,"download complete");
-            viewPager.setAdapter(new pagerAdapter(lstView));
+            if(lstView!=null)
+                viewPager.setAdapter(new pagerAdapter(lstView));
+            else
+                Toast.makeText(getApplicationContext(),"get data error",Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
             imageView.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);
