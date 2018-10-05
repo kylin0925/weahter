@@ -21,4 +21,6 @@
     <string name="menu_daily">Daily</string>
     <string name="menu_weekly">Weekly</string>
     <string name="menu_satellite">Satellite</string>
+    <string name="weekly_day">day</string>
+    <string name="weekly_night">night</string>
 </resources>
