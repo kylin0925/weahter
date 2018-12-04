@@ -11,96 +11,104 @@
         android:layout_height="wrap_content"
 
         android:textSize="36sp"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="30dp" />
-
-    <TextView
-        android:id="@+id/txtStartTime1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/txtLocation"
-        android:text=""
-        android:textSize="18sp" />
-
-    <ImageView
-        android:id="@+id/ivWeather1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtStartTime1"
-        android:src="@drawable/icons8_fog_50" />
-
-    <TextView
-        android:id="@+id/txtTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivWeather1"
-        android:layout_marginLeft="2dp"
-        android:background="@drawable/rounded_corner"
-        android:text=""
-        android:textSize="20dp" />
+        android:layout_alignParentEnd="true"/>
 
-    <TextView
-        android:id="@+id/txtStartTime2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
-        android:layout_below="@+id/txtTemp"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textSize="18sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/txtStartTime1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="false"-->
+        <!--android:layout_alignParentStart="false"-->
+        <!--android:layout_below="@+id/txtLocation"-->
+        <!--android:text=""-->
+        <!--android:textSize="18sp" />-->
 
-    <ImageView
-        android:id="@+id/ivWeather2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtStartTime2"
-        android:src="@drawable/icons8_fog_50" />
+    <!--<ImageView-->
+        <!--android:id="@+id/ivWeather1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txtStartTime1"-->
+        <!--android:src="@drawable/icons8_fog_50" />-->
 
-    <TextView
-        android:id="@+id/txtTemp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivWeather2"
-        android:layout_marginLeft="2dp"
-        android:background="@drawable/rounded_corner"
-        android:text=""
-        android:textSize="20dp" />
+    <!--<TextView-->
+        <!--android:id="@+id/txtTemp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_below="@+id/ivWeather1"-->
+        <!--android:layout_marginLeft="2dp"-->
+        <!--android:background="@drawable/rounded_corner"-->
+        <!--android:text=""-->
+        <!--android:textSize="20dp" />-->
 
-    <TextView
-        android:id="@+id/txtStartTime3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTemp2"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textSize="18sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/txtStartTime2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="false"-->
+        <!--android:layout_alignParentRight="false"-->
+        <!--android:layout_below="@+id/txtTemp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:text=""-->
+        <!--android:textSize="18sp" />-->
 
-    <ImageView
-        android:id="@+id/ivWeather3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtStartTime3"
-        android:contentDescription="@string/menu_daily"
-        android:src="@drawable/icons8_fog_50" />
+    <!--<ImageView-->
+        <!--android:id="@+id/ivWeather2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txtStartTime2"-->
+        <!--android:src="@drawable/icons8_fog_50" />-->
 
-    <TextView
-        android:id="@+id/txtTemp3_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivWeather3"
-        android:layout_marginLeft="2dp"
-        android:background="@drawable/rounded_corner"
-        android:text=""
-        android:textSize="20dp" />
+    <!--<TextView-->
+        <!--android:id="@+id/txtTemp2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_below="@+id/ivWeather2"-->
+        <!--android:layout_marginLeft="2dp"-->
+        <!--android:background="@drawable/rounded_corner"-->
+        <!--android:text=""-->
+        <!--android:textSize="20dp" />-->
 
+    <!--<TextView-->
+        <!--android:id="@+id/txtStartTime3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txtTemp2"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:text=""-->
+        <!--android:textSize="18sp" />-->
 
+    <!--<ImageView-->
+        <!--android:id="@+id/ivWeather3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txtStartTime3"-->
+        <!--android:contentDescription="@string/menu_daily"-->
+        <!--android:src="@drawable/icons8_fog_50" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/txtTemp3_1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_below="@+id/ivWeather3"-->
+        <!--android:layout_marginLeft="2dp"-->
+        <!--android:background="@drawable/rounded_corner"-->
+        <!--android:text=""-->
+        <!--android:textSize="20dp" />-->
+
+<ListView
+    android:id="@+id/dailyList"
+    android:layout_below="@+id/txtLocation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</ListView>
 </RelativeLayout>

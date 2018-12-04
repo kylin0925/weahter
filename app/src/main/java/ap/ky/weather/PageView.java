@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,36 +49,38 @@ public class PageView extends RelativeLayout{
 
         textView.setText(location.locationName);
 
-        if(location.weatherElement!=null) {
-            WeatherElement wx = location.weatherElement.get(0);
-            WeatherElement maxt = location.weatherElement.get(4);
-            WeatherElement mint = location.weatherElement.get(2);
-            WeatherElement pop = location.weatherElement.get(1);
-
-            String time1 = maxt.time.get(0).startTime + " ~ " + maxt.time.get(0).endTime;
-            String time2 = maxt.time.get(1).startTime + " ~ " + maxt.time.get(1).endTime;
-            String time3 = maxt.time.get(2).startTime + " ~ " + maxt.time.get(2).endTime;
-
-
-            txtTemp1.setText(mint.time.get(0).parameter.parameterName + " ~ " +
-                    maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName+ "\n" +
-                    "降雨機率: " + pop.time.get(0).parameter.parameterName + "%");
-            txtTemp2.setText(mint.time.get(1).parameter.parameterName + " ~ " +
-                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName + "\n" +
-                    "降雨機率: " + pop.time.get(1).parameter.parameterName + "%");
-            txtTemp3.setText(mint.time.get(2).parameter.parameterName + " ~ " +
-                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName +"\n" +
-                    "降雨機率: " + pop.time.get(2).parameter.parameterName + "%");
-
-            Log.e("temp debug","get icon" + WeatherIconMap.iconMap.get( wx.time.get(1).parameter.parameterName));
-            ivWeather1.setImageResource(WeatherIconMap.iconMap.get( wx.time.get(0).parameter.parameterName));
-            ivWeather2.setImageResource(WeatherIconMap.iconMap.get( wx.time.get(1).parameter.parameterName));
-            ivWeather3.setImageResource(WeatherIconMap.iconMap.get( wx.time.get(2).parameter.parameterName));
-            txtStartTime1.setText(time1);
-            txtStartTime2.setText(time2);
-            txtStartTime3.setText(time3);
-        }
-
+//        if(location.weatherElement!=null) {
+//            WeatherElement wx = location.weatherElement.get(0);
+//            WeatherElement maxt = location.weatherElement.get(4);
+//            WeatherElement mint = location.weatherElement.get(2);
+//            WeatherElement pop = location.weatherElement.get(1);
+//
+//            String time1 = maxt.time.get(0).startTime + " ~ " + maxt.time.get(0).endTime;
+//            String time2 = maxt.time.get(1).startTime + " ~ " + maxt.time.get(1).endTime;
+//            String time3 = maxt.time.get(2).startTime + " ~ " + maxt.time.get(2).endTime;
+//
+//
+//            txtTemp1.setText(mint.time.get(0).parameter.parameterName + " ~ " +
+//                    maxt.time.get(0).parameter.parameterName + "\n"  + wx.time.get(0).parameter.parameterName+ "\n" +
+//                    "降雨機率: " + pop.time.get(0).parameter.parameterName + "%");
+//            txtTemp2.setText(mint.time.get(1).parameter.parameterName + " ~ " +
+//                    maxt.time.get(1).parameter.parameterName + "\n" + wx.time.get(1).parameter.parameterName + "\n" +
+//                    "降雨機率: " + pop.time.get(1).parameter.parameterName + "%");
+//            txtTemp3.setText(mint.time.get(2).parameter.parameterName + " ~ " +
+//                    maxt.time.get(2).parameter.parameterName + "\n" + wx.time.get(2).parameter.parameterName +"\n" +
+//                    "降雨機率: " + pop.time.get(2).parameter.parameterName + "%");
+//
+//            Log.e("temp debug","get icon" + WeatherIconMap.iconMap.get( wx.time.get(1).parameter.parameterName));
+//            ivWeather1.setImageResource(WeatherIconMap.iconMap.get( wx.time.get(0).parameter.parameterName));
+//            ivWeather2.setImageResource(WeatherIconMap.iconMap.get( wx.time.get(1).parameter.parameterName));
+//            ivWeather3.setImageResource(WeatherIconMap.iconMap.get( wx.time.get(2).parameter.parameterName));
+//            txtStartTime1.setText(time1);
+//            txtStartTime2.setText(time2);
+//            txtStartTime3.setText(time3);
+//        }
+        DailyAdapter dailyAdapter = new DailyAdapter(context,location.weatherElement);
+        ListView listView = view.findViewById(R.id.dailyList);
+        listView.setAdapter(dailyAdapter);
         addView(view);
     }
 }

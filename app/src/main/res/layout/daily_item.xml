@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/txtStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/txtLocation"
+        android:text=""
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_below="@+id/txtStartTime"
+        android:background="@drawable/rounded_corner"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/ivWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime"
+        android:src="@drawable/icons8_fog_50" />
+
+    <TextView
+        android:id="@+id/txtTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivWeather"
+        android:layout_marginLeft="2dp"
+
+        android:text=""
+        android:textSize="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+    </LinearLayout>
+</RelativeLayout>
