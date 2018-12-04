@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018" />
+
+    <ImageView
+        android:id="@+id/ivWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime"
+        android:src="@drawable/icons8_summer_48" />
+
+    <TextView
+        android:id="@+id/txtTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivWeather"
+        android:layout_below="@+id/txtStartTime"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/ivWeather"
+        android:gravity="bottom"
+        android:text="30" />
+
+    <ImageView
+        android:id="@+id/ivWeather1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtStartTime"
+        android:layout_centerInParent="true"
+        android:src="@drawable/icons8_summer_48" />
+
+    <TextView
+        android:id="@+id/txtTemp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivWeather1"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtStartTime"
+        android:layout_toRightOf="@+id/ivWeather1"
+        android:gravity="bottom"
+        android:text="TextView" />
+
+</RelativeLayout>

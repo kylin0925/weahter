@@ -1,349 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginBottom="60dp"-->
+    <!--android:scrollbarAlwaysDrawVerticalTrack="true"-->
+    <!--android:scrollbars="vertical">-->
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbarAlwaysDrawVerticalTrack="true"-->
+        <!--android:scrollbars="vertical">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtLocation"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:textSize="36sp"-->
+            <!--tools:layout_editor_absoluteX="65dp"-->
+            <!--tools:layout_editor_absoluteY="30dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:layout_below="@+id/txtLocation"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime1"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather1"-->
+            <!--android:layout_below="@+id/txtStartTime1"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather1"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather1_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime1"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivweather1_1"-->
+            <!--android:layout_alignParentBottom="false"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@+id/txtStartTime1"-->
+            <!--android:layout_toRightOf="@+id/ivweather1_1"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="false"-->
+            <!--android:layout_alignParentRight="false"-->
+            <!--android:layout_below="@+id/ivWeather1"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime2"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather2"-->
+            <!--android:layout_below="@+id/txtStartTime2"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather2"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather2_2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime2"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--app:srcCompat="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp2_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivweather2_2"-->
+            <!--android:layout_below="@+id/txtStartTime2"-->
+            <!--android:layout_toRightOf="@+id/ivweather2_2"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/ivWeather2"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime3"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather3"-->
+            <!--android:layout_below="@+id/txtStartTime3"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather3"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather3_3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime3"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--app:srcCompat="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp3_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather3"-->
+            <!--android:layout_below="@+id/txtStartTime3"-->
+            <!--android:layout_toRightOf="@+id/ivweather3_3"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/ivWeather3"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime4"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather4"-->
+            <!--android:layout_below="@+id/txtStartTime4"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather4"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather4_4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime4"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--app:srcCompat="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp4_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather4"-->
+            <!--android:layout_below="@+id/txtStartTime4"-->
+            <!--android:layout_toRightOf="@+id/ivweather4_4"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/ivWeather4"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime5"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather5"-->
+            <!--android:layout_below="@+id/txtStartTime5"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather5"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather5_5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime5"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--app:srcCompat="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp5_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather5"-->
+            <!--android:layout_below="@+id/txtStartTime5"-->
+            <!--android:layout_toRightOf="@+id/ivweather5_5"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/ivWeather5"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime6"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather6"-->
+            <!--android:layout_below="@+id/txtStartTime6"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather6"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather6_6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime6"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--app:srcCompat="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp6_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather6"-->
+            <!--android:layout_below="@+id/txtStartTime6"-->
+            <!--android:layout_toRightOf="@+id/ivweather6_6"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtStartTime7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/ivWeather6"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="2018" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivWeather7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime7"-->
+            <!--android:src="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivWeather7"-->
+            <!--android:layout_below="@+id/txtStartTime7"-->
+            <!--android:layout_marginLeft="2dp"-->
+            <!--android:layout_toRightOf="@+id/ivWeather7"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="30" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivweather7_7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtStartTime7"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--app:srcCompat="@drawable/icons8_summer_48" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtTemp7_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/ivweather7_7"-->
+            <!--android:layout_below="@+id/txtStartTime7"-->
+            <!--android:layout_toRightOf="@+id/ivweather7_7"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="TextView" />-->
+
+    <!--</RelativeLayout>-->
+<!--</ScrollView>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="60dp"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
-    android:scrollbars="vertical">
+    android:layout_height="match_parent">
+    <TextView
+    android:id="@+id/txtLocation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    android:textSize="36sp"
+    tools:layout_editor_absoluteX="65dp"
+    tools:layout_editor_absoluteY="30dp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_below="@+id/txtLocation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="vertical">
+        android:layout_height="match_parent"/>
 
-        <TextView
-            android:id="@+id/txtLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:textSize="36sp"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="30dp" />
-
-        <TextView
-            android:id="@+id/txtStartTime1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_below="@+id/txtLocation"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime1"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather1"
-            android:layout_below="@+id/txtStartTime1"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/ivWeather1"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather1_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime1"
-            android:layout_centerInParent="true"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivweather1_1"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtStartTime1"
-            android:layout_toRightOf="@+id/ivweather1_1"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtStartTime2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentRight="false"
-            android:layout_below="@+id/ivWeather1"
-            android:layout_marginTop="10dp"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime2"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather2"
-            android:layout_below="@+id/txtStartTime2"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/ivWeather2"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather2_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime2"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            app:srcCompat="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp2_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivweather2_2"
-            android:layout_below="@+id/txtStartTime2"
-            android:layout_toRightOf="@+id/ivweather2_2"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtStartTime3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivWeather2"
-            android:layout_marginTop="10dp"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime3"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather3"
-            android:layout_below="@+id/txtStartTime3"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/ivWeather3"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather3_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime3"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            app:srcCompat="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp3_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather3"
-            android:layout_below="@+id/txtStartTime3"
-            android:layout_toRightOf="@+id/ivweather3_3"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtStartTime4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivWeather3"
-            android:layout_marginTop="10dp"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime4"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather4"
-            android:layout_below="@+id/txtStartTime4"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/ivWeather4"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather4_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime4"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            app:srcCompat="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp4_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather4"
-            android:layout_below="@+id/txtStartTime4"
-            android:layout_toRightOf="@+id/ivweather4_4"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtStartTime5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivWeather4"
-            android:layout_marginTop="10dp"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime5"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather5"
-            android:layout_below="@+id/txtStartTime5"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/ivWeather5"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather5_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime5"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            app:srcCompat="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp5_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather5"
-            android:layout_below="@+id/txtStartTime5"
-            android:layout_toRightOf="@+id/ivweather5_5"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtStartTime6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivWeather5"
-            android:layout_marginTop="10dp"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime6"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather6"
-            android:layout_below="@+id/txtStartTime6"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/ivWeather6"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather6_6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime6"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            app:srcCompat="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp6_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather6"
-            android:layout_below="@+id/txtStartTime6"
-            android:layout_toRightOf="@+id/ivweather6_6"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtStartTime7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivWeather6"
-            android:layout_marginTop="10dp"
-            android:text="2018" />
-
-        <ImageView
-            android:id="@+id/ivWeather7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime7"
-            android:src="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivWeather7"
-            android:layout_below="@+id/txtStartTime7"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/ivWeather7"
-            android:gravity="bottom"
-            android:text="30" />
-
-        <ImageView
-            android:id="@+id/ivweather7_7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtStartTime7"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp"
-            app:srcCompat="@drawable/icons8_summer_48" />
-
-        <TextView
-            android:id="@+id/txtTemp7_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivweather7_7"
-            android:layout_below="@+id/txtStartTime7"
-            android:layout_toRightOf="@+id/ivweather7_7"
-            android:gravity="bottom"
-            android:text="TextView" />
-
-    </RelativeLayout>
-</ScrollView>
+</RelativeLayout>

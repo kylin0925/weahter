@@ -19,12 +19,12 @@ public class PageView extends RelativeLayout{
         View view = LayoutInflater.from(context).inflate(R.layout.pageview_daily_layout, null);
         TextView textView = (TextView) view.findViewById(R.id.txtLocation);
 
-        TextView txtStartTime1 = (TextView) view.findViewById(R.id.txtStartTime1);
-        TextView txtStartTime2 = (TextView) view.findViewById(R.id.txtStartTime2);
-        TextView txtStartTime3 = (TextView) view.findViewById(R.id.txtStartTime3);
-        ImageView ivWeather1 = (ImageView)view.findViewById(R.id.ivWeather1);
-        ImageView ivWeather2 = (ImageView)view.findViewById(R.id.ivWeather2);
-        ImageView ivWeather3 = (ImageView)view.findViewById(R.id.ivWeather3);
+//        TextView txtStartTime1 = (TextView) view.findViewById(R.id.txtStartTime1);
+//        TextView txtStartTime2 = (TextView) view.findViewById(R.id.txtStartTime2);
+//        TextView txtStartTime3 = (TextView) view.findViewById(R.id.txtStartTime3);
+//        ImageView ivWeather1 = (ImageView)view.findViewById(R.id.ivWeather1);
+//        ImageView ivWeather2 = (ImageView)view.findViewById(R.id.ivWeather2);
+//        ImageView ivWeather3 = (ImageView)view.findViewById(R.id.ivWeather3);
         //TextView txtStartTime4 = (TextView) view.findViewById(R.id.txtStartTime4);
         //TextView txtStartTime5 = (TextView) view.findViewById(R.id.txtStartTime5);
         //TextView txtStartTime6 = (TextView) view.findViewById(R.id.txtStartTime6);
@@ -35,8 +35,8 @@ public class PageView extends RelativeLayout{
         //txtStartTime7.setVisibility(GONE);
 
         TextView txtTemp1 = (TextView) view.findViewById(R.id.txtTemp);
-        TextView txtTemp2 = (TextView) view.findViewById(R.id.txtTemp2);
-        TextView txtTemp3 = (TextView) view.findViewById(R.id.txtTemp3_1);
+//        TextView txtTemp2 = (TextView) view.findViewById(R.id.txtTemp2);
+//        TextView txtTemp3 = (TextView) view.findViewById(R.id.txtTemp3_1);
         /*TextView txtTemp4 = (TextView) view.findViewById(R.id.txtTemp4);
         TextView txtTemp5 = (TextView) view.findViewById(R.id.txtTemp5);
         TextView txtTemp6 = (TextView) view.findViewById(R.id.txtTemp6);
