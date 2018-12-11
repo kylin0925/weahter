@@ -1,6 +1,8 @@
 package ap.ky.weather;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,9 @@ public class PageView extends RelativeLayout{
         textView.setText(location.locationName);
 
         DailyAdapter dailyAdapter = new DailyAdapter(context,location.weatherElement);
-        ListView listView = view.findViewById(R.id.dailyList);
+        RecyclerView listView = view.findViewById(R.id.dailyList);
         listView.setAdapter(dailyAdapter);
+        listView.setLayoutManager(new LinearLayoutManager(context));
         addView(view);
     }
 }

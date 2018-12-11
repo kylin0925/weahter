@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,11 +17,11 @@
         android:layout_alignParentRight="true"
         android:textSize="36sp" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/dailyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/txtLocation">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
