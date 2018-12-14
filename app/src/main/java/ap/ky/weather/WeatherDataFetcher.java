@@ -2,6 +2,7 @@ package ap.ky.weather;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -9,6 +10,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,6 +22,9 @@ public class WeatherDataFetcher {
     String DAILYDATA = "F-C0032-001";
     String WEEKLYDATA = "F-C0032-005";
     String dataurl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/%s?authorizationkey=%s";
+
+    static File file = Environment.getExternalStorageDirectory();
+    public static String downloadPath = file.getPath() + File.separator + "satellite";
     public static WeatherDataFetcher getInstance(){
         if(weatherDataFetcher == null)
             return new WeatherDataFetcher();

@@ -1,12 +1,17 @@
 package ap.ky.weather;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -211,6 +217,26 @@ public class MainActivity extends AppCompatActivity {
         //t.start();
         FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
         fetchWeatherTask.execute(TYPE_DAILY);
+
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=
+                PackageManager.PERMISSION_GRANTED){
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0
+                );
+        }
+
+        File downloadFolder = new File(WeatherDataFetcher.downloadPath);
+        Log.d(TAG,"path " + downloadFolder.getPath());
+
+        if(downloadFolder.isDirectory() == false) {
+            boolean b = downloadFolder.mkdir();
+            Log.e(TAG,"create "+ b);
+        }
+
+        Intent intent = new Intent(this,DownloadImageService.class);
+        intent.putExtra("APIKEY",apiKey);
+        startService(intent);
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
@@ -258,9 +284,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int i = item.getItemId();
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+//        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+//            return true;
+//        }
         if(i == R.id.menukey){
             startActivity(new Intent(this,MainKeyActivity.class));
             return true;
