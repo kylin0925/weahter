@@ -1,49 +1,115 @@
 package ap.ky.weather;
 
+import android.app.AlarmManager;
+import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Binder;
-import android.os.Environment;
+import android.os.Build;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.PowerManager;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import android.os.Handler;
 
-public class DownloadImageService extends Service {
+
+
+
+public class DownloadImageService extends IntentService {
     final String url = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/%s?authorizationkey=%s&format=json";
     String TAG = "DownloadImageService";
     String apikey = "";
     String DataID = "O-B0028-003";
     ServiceBinder mBinder = new ServiceBinder();
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            Log.d(TAG,"apikey :" + apikey);
+
+            try {
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        startDownloadTask();
+                    }
+                };
+                Thread thread = new Thread(runnable);
+                thread.start();
+                //thread.join();
+            }catch (Exception ex){
+                Log.e(TAG,"error "+ ex.toString());
+            }
+        }
+    };
     public DownloadImageService() {
+        super("DownloadImageService");
         Log.d(TAG,"DownloadImageService()");
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG,"onCreate");
+        Log.d(TAG,"onCreate ...");
+        String CHANNEL_ID = "my_channel_01";
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                "Channel human readable title",
+                NotificationManager.IMPORTANCE_DEFAULT);
+
+        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).
+                createNotificationChannel(channel);
+
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("")
+                .setContentText("").build();
+
+        startForeground(1,notification);
     }
 
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+//        Log.d(TAG,"onStartCommand ");
+//        handler.sendEmptyMessage(0);
+//        return START_STICKY;
+//    }
+
+//    @Override
+//    public IBinder onBind(Intent intent) {
+//        // TODO: Return the communication channel to the service.
+//        return mBinder;
+//    }
+
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG,"onStartCommand ");
+    protected void onHandleIntent(@Nullable Intent intent) {
+        Log.e(TAG,"onHandleIntent");
         apikey = intent.getStringExtra("APIKEY");
         Log.d(TAG,"apikey :" + apikey);
         startDownloadTask();
-        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        return mBinder;
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG,"onDestroy");
     }
+
     class ImageData{
         String obsTime;
         String uri;
@@ -65,36 +131,29 @@ public class DownloadImageService extends Service {
         }
         return imageData;
     }
-    void startDownloadTask(){
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                if(url!=null && url!="") {
-                    WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
-                    String fullurl = String.format(url, DataID, apikey);
-                    String jsonData = weatherDataFetcher.sentHttpRequestGet(fullurl);
-                    Log.d(TAG, "jsonData " + jsonData);
-                    ImageData imageData =parserJSON(jsonData);
-                    Bitmap bitmap = weatherDataFetcher.getSatelliteImage(imageData.uri);
+    void startDownloadTask() {
+        Log.d(TAG, "startDownloadTask");
 
-                    String output = String.format("%s/%s_%s.jpg",WeatherDataFetcher.downloadPath,
-                            DataID,imageData.obsTime);
-                    try {
-                        FileOutputStream fileOutputStream = new FileOutputStream(output);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG,90,fileOutputStream);
-                        fileOutputStream.flush();
-                        fileOutputStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        WeatherDataFetcher weatherDataFetcher = WeatherDataFetcher.getInstance();
+        String fullurl = String.format(url, DataID, apikey);
+        String jsonData = weatherDataFetcher.sentHttpRequestGet(fullurl);
+        Log.d(TAG, "jsonData " + jsonData);
+        ImageData imageData = parserJSON(jsonData);
+        Bitmap bitmap = weatherDataFetcher.getSatelliteImage(imageData.uri);
 
-                }
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        String output = String.format("%s/%s_%s.jpg", WeatherDataFetcher.downloadPath,
+                DataID, imageData.obsTime);
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(output);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
     class ServiceBinder extends Binder{
         public void startDownload(){
             Log.d(TAG,"start download");

@@ -1,14 +1,22 @@
 package ap.ky.weather;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +34,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,8 +68,22 @@ public class MainActivity extends AppCompatActivity {
 
     String queryStr = "http://opendata.cwb.gov.tw/opendataapi?dataid=%s&authorizationkey=%s";
     ProgressBar progressBar;
+    SeekBar seekBar;
+    ConstraintLayout satellite;
+    File[] imageFileList = null;
+
+    void setAlarmManager(){
+        Intent intent = new Intent(this,WeatherReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager  alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
 
+
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime(),1000 * 60 ,pendingIntent);
+    }
     private class FetchSatelliteImageTask extends AsyncTask<String,Integer,Bitmap>{
         String TAG = "FetchDataTask";
         @Override
@@ -162,7 +185,8 @@ public class MainActivity extends AppCompatActivity {
             else
                 Toast.makeText(getApplicationContext(),"get data error",Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
-            imageView.setVisibility(View.GONE);
+            //imageView.setVisibility(View.GONE);
+            satellite.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);
         }
     }
@@ -171,6 +195,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        satellite = (ConstraintLayout) findViewById(R.id.satellite_constraint);
+        satellite.setVisibility(View.GONE);
+
         txtWeather = (TextView)findViewById(R.id.txtWeatherData);
         weatherType = getResources().getStringArray(R.array.datatype_array);
 
@@ -183,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager)findViewById(R.id.pager);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        seekBar = (SeekBar)findViewById(R.id.seekBar);
+        seekBar.setMax(0);
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -191,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 Log.e(TAG,"" + id);
                 int position = 0;
+                progressBar.setVisibility(View.VISIBLE);
                 if(id == R.id.menu_daily){
                     position = TYPE_DAILY;
                     FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
@@ -201,14 +231,25 @@ public class MainActivity extends AppCompatActivity {
                     fetchWeatherTask.execute(TYPE_WEEKLY);
                 }else if(id == R.id.menu_satellite){
                     position = TYPE_SATELLITE;
-                    FetchSatelliteImageTask fetchDataTask = new FetchSatelliteImageTask();
-                    fetchDataTask.execute("http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
+                    //FetchSatelliteImageTask fetchDataTask = new FetchSatelliteImageTask();
+                    //fetchDataTask.execute("http://opendata.cwb.gov.tw/opendata/MSC/O-B0028-003.jpg");
+                    File directory = new File(WeatherDataFetcher.downloadPath);
+                    imageFileList = directory.listFiles();
+                    for (File file :imageFileList){
+                        Log.d(TAG,file.getName());
+                    }
+                    seekBar.setMax(imageFileList.length-1);
+                    seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+                    seekBar.setProgress(imageFileList.length-1);
+
+                    satellite.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.GONE);
                 }
                 Log.e(TAG,"position " + position);
                 //Thread t = new Thread(new queryRun(position));
                 //t.start();
 
-                progressBar.setVisibility(View.VISIBLE);
                 return true;
             }
         });
@@ -234,9 +275,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG,"create "+ b);
         }
 
-        Intent intent = new Intent(this,DownloadImageService.class);
-        intent.putExtra("APIKEY",apiKey);
-        startService(intent);
+//        Intent intent = new Intent(this,DownloadImageService.class);
+//        intent.putExtra("APIKEY",apiKey);
+//        startService(intent);
+        setAlarmManager();
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
@@ -294,4 +336,25 @@ public class MainActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+
+    SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            Log.d(TAG,"progress " + progress);
+            Bitmap bitmap = BitmapFactory.decodeFile(WeatherDataFetcher.downloadPath +
+                    File.separator + imageFileList[progress].getName());
+
+            imageView.setImageBitmap(bitmap);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
+    };
 }
