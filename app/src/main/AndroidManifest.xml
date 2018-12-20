@@ -28,7 +28,7 @@
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".DownloadImageJob"
+            android:name=".DownloadJob"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
         <receiver
             android:name=".WeatherReceiver"

@@ -1,5 +1,7 @@
 package ap.ky.weather;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.PowerManager;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
@@ -29,14 +32,26 @@ public class WeatherReceiver extends BroadcastReceiver {
             Intent intent = new Intent(context, DownloadImageService.class);
             intent.putExtra("APIKEY", apiKey);
 
-            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
-                context.startForegroundService(intent);
-            }else {
-                context.startService(intent);
-            }
-            Log.e(TAG, "end Receive");
+            context.startService(intent);
+            setAlarmManager(context);
+
         } catch (Exception ex) {
             Log.e(TAG, ex.toString());
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    void setAlarmManager(Context context){
+        Log.e(TAG,"setAlarmManager");
+        Intent intent = new Intent(context,WeatherReceiver.class);
+        PendingIntent pendingIntent =  PendingIntent.getBroadcast(context,0,intent,
+                0);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+
+        int offset = 60 * 1000;
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + offset ,pendingIntent);
     }
 }

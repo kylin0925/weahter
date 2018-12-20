@@ -68,33 +68,8 @@ public class DownloadImageService extends IntentService {
         super.onCreate();
         Log.d(TAG,"onCreate ...");
         String CHANNEL_ID = "my_channel_01";
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT);
 
-        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).
-                createNotificationChannel(channel);
-
-
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("")
-                .setContentText("").build();
-
-        startForeground(1,notification);
     }
-
-//    @Override
-//    public int onStartCommand(Intent intent, int flags, int startId) {
-//        Log.d(TAG,"onStartCommand ");
-//        handler.sendEmptyMessage(0);
-//        return START_STICKY;
-//    }
-
-//    @Override
-//    public IBinder onBind(Intent intent) {
-//        // TODO: Return the communication channel to the service.
-//        return mBinder;
-//    }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {

@@ -1,8 +1,11 @@
 package ap.ky.weather;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +15,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -72,17 +77,19 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout satellite;
     File[] imageFileList = null;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     void setAlarmManager(){
+        Log.e(TAG,"setAlarmManager");
         Intent intent = new Intent(this,WeatherReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+               0);
 
         AlarmManager  alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
 
-
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime(),1000 * 60 ,pendingIntent);
+        int offset = 10 * 1000;
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + offset ,pendingIntent);
     }
     private class FetchSatelliteImageTask extends AsyncTask<String,Integer,Bitmap>{
         String TAG = "FetchDataTask";
@@ -191,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -278,7 +286,9 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(this,DownloadImageService.class);
 //        intent.putExtra("APIKEY",apiKey);
 //        startService(intent);
-        setAlarmManager();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setAlarmManager();
+        }
     }
     private class pagerAdapter extends PagerAdapter{
         private List<View> lstPage;
