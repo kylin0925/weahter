@@ -118,10 +118,10 @@ public class WeeklyListAdapter extends RecyclerView.Adapter<WeeklyListAdapter.Vi
 
 
             templst = mint.time.get(position*2).parameter.parameterName + " ~ " +
-                    maxt.time.get(position*2).parameter.parameterName + "\n" +
+                    maxt.time.get(position*2).parameter.parameterName + " ℃\n" +
                     wx.time.get(position*2).parameter.parameterName ;
             templstNight = mint.time.get(position*2 + 1).parameter.parameterName + " ~ " +
-                    maxt.time.get(position*2 + 1).parameter.parameterName + "\n" +
+                    maxt.time.get(position*2 + 1).parameter.parameterName + " ℃\n" +
                     wx.time.get(position*2 + 1).parameter.parameterName;
             weatherIconlst = WeatherIconMap.iconMap.get( wx.time.get(position*2).parameter.parameterName);
             weatherIconlstNight = WeatherIconMap.iconMap.get( wx.time.get(position*2+1).parameter.parameterName);

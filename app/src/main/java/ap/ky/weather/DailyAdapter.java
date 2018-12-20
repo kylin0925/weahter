@@ -67,7 +67,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
                 String time1 = maxt.time.get(position).startTime + " ~ " + maxt.time.get(position).endTime;
 
                 txtTemp.setText(mint.time.get(position).parameter.parameterName + " ~ " +
-                        maxt.time.get(position).parameter.parameterName + "\n"  + wx.time.get(position).parameter.parameterName+ "\n" +
+                        maxt.time.get(position).parameter.parameterName + " ℃\n"  + wx.time.get(position).parameter.parameterName+ "\n" +
                         "降雨機率: " + pop.time.get(position).parameter.parameterName + "%");
 
                 Log.e("temp debug","get icon" + WeatherIconMap.iconMap.get( wx.time.get(position).parameter.parameterName));
